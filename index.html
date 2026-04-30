@@ -1,219 +1,268 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="title">RechargeStatut.com | Vérification Officielle</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="antialiased">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title" data-i18n="title">StatusRechs | Vérification Officielle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --bg-hero: #f1f5f9;
+            --bg-site: #ffffff;
+            --border: #e2e8f0;
+        }
 
-<header class="main-header">
-  <div class="header-container">
-    <nav class="nav-left">
-      <a href="#" class="nav-item" data-i18n="nav_home">Accueil</a>
-    </nav>
-    
-    <div class="nav-right">
-      <div class="relative">
-        <div class="selected-lang" id="lang-button">
-          <img src="https://flagcdn.com/w20/fr.png" alt="FR" id="current-flag">
-          <span id="current-lang-name">Français</span>
-          <small>▼</small>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg-site); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+        .hidden { display: none !important; }
+
+        /* Header structure du formulaire[cite: 1] */
+        header { 
+            position: fixed; width: 100%; top: 0; z-index: 1000; 
+            background: white; border-bottom: 1px solid var(--border); height: 80px;
+        }
+        .nav-wrapper { height: 100%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-weight: 800; font-size: 1.6rem; color: var(--secondary); text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        /* MENU LANGUE : ADAPTATION EXACTE[cite: 1] */
+        .relative { position: relative; }
+        .selected-lang { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: #334155; }
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 0;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            z-index: 50;
+            list-style: none;
+            min-width: 150px;
+            margin-top: 10px;
+        }
+        .lang-options li {
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+            font-size: 14px;
+            color: #334155;
+        }
+        .lang-options li:hover { background: #f1f5f9; }
+
+        /* Hero Section */
+        .hero { background: var(--bg-hero); padding: 160px 0 100px; text-align: center; border-bottom: 1px solid var(--border); }
+        .badge { background: #fff; color: var(--primary); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; margin-bottom: 25px; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; }
+        .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
+        #count { font-size: 3.5rem; font-weight: 800; color: var(--primary); display: block; line-height: 1; }
+        .counter-text { font-weight: 600; color: var(--text-light); font-size: 1.2rem; }
+        h1 { font-size: clamp(2rem, 7vw, 3.5rem); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin: 25px 0; color: var(--secondary); }
+        .hero p { color: var(--text-light); font-size: 1.1rem; max-width: 700px; margin: 0 auto 40px; }
+        .btn-main { background: var(--primary); color: white; padding: 18px 40px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; display: inline-block; transition: 0.3s; }
+        .btn-main:hover { background: #1e40af; transform: translateY(-2px); }
+
+        /* Section Select */
+        .issuer-section { padding: 100px 0; text-align: center; }
+        .issuer-list { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
+        .issuer-item { width: 100%; max-width: 350px; transition: 0.4s ease; display: block; }
+        .issuer-item img { width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .issuer-item:hover { transform: translateY(-10px); }
+
+        /* FAQ */
+        .faq { padding: 100px 0; max-width: 800px; margin: 0 auto; }
+        .faq h2 { text-align: center; font-size: 2.2rem; font-weight: 800; margin-bottom: 50px; color: var(--secondary); }
+        .faq-item { border-bottom: 1px solid var(--border); width: 100%; background: white; }
+        .faq-question { width: 100%; padding: 25px; text-align: left; background: none; border: none; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; color: var(--secondary); }
+        .faq-answer { padding: 0 25px 25px; color: var(--text-light); display: none; font-size: 1rem; }
+
+        /* Footer */
+        footer { background: var(--secondary); color: #94a3b8; padding: 60px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-weight: 700; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-bottom { border-top: 1px solid #1e293b; text-align: center; padding-top: 30px; margin-top: 40px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-wrapper">
+        <a href="index.html" class="logo">Status<span>Rechs</span></a>
+        
+        <!-- Sélecteur de langue identique au formulaire[cite: 1] -->
+        <div class="relative">
+            <div class="selected-lang" id="lang-button">
+                <img src="https://flagcdn.com/w20/fr.png" alt="FR" id="current-flag">
+                <span id="current-lang-name">Français</span>
+                <small>▼</small>
+            </div>
+            <ul class="lang-options hidden" id="lang-dropdown">
+                <li onclick="setLang('fr')"><img src="https://flagcdn.com/w20/fr.png"> Français</li>
+                <li onclick="setLang('en')"><img src="https://flagcdn.com/w20/gb.png"> English</li>
+                <li onclick="setLang('es')"><img src="https://flagcdn.com/w20/es.png"> Español</li>
+                <li onclick="setLang('de')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</li>
+                <li onclick="setLang('pt')"><img src="https://flagcdn.com/w20/pt.png"> Português</li>
+            </ul>
         </div>
-        <ul class="lang-options hidden" id="lang-dropdown">
-          <li onclick="setLang('en')"><img src="https://flagcdn.com/w20/gb.png"> English</li>
-          <li onclick="setLang('fr')"><img src="https://flagcdn.com/w20/fr.png"> Français</li>
-          <li onclick="setLang('es')"><img src="https://flagcdn.com/w20/es.png"> Español</li>
-          <li onclick="setLang('de')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</li>
-          <li onclick="setLang('it')"><img src="https://flagcdn.com/w20/it.png"> Italiano</li>
-        </ul>
-      </div>
     </div>
-  </div>
 </header>
 
 <main>
-  <section class="hero-section">
-    <div class="container-center">
-      <div class="status-badge">
-        <span class="status-dot"></span> 
-        <span data-i18n="status_operational">Système de vérification opérationnel</span>
-      </div>
-      
-      <h1 class="hero-title" data-i18n="hero_title">Bienvenue sur RechargeStatut.com</h1>
-      <p class="hero-subtitle" data-i18n="hero_subtitle">Vérifiez rapidement l’authenticité et le solde de vos tickets de recharge en toute sécurité.</p>
-      
-      <div class="counter-box">
-        <span id="user-count">0</span>
-        <p class="counter-label-text" data-i18n="counter_text">Utilisateurs nous font confiance</p>
-      </div>
-
-      <a href="#galerie" class="btn-hero" data-i18n="btn_explore">Commencer maintenant</a>
-    </div>
-  </section>
-
-  <section class="steps-section">
-    <div class="container-center">
-      <h2 class="section-title" data-i18n="steps_title">Comment ça marche ?</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <h3 data-i18n="step1_title">Sélectionnez</h3>
-          <p data-i18n="step1_text">Choisissez l'émetteur de votre ticket parmi notre liste.</p>
+    <section class="hero">
+        <div class="container">
+            <div class="badge"><span class="dot"></span> <span data-i18n="badge">Protocoles Sécurisés Actifs</span></div>
+            <span id="count">+5,000</span>
+            <span class="counter-text" data-i18n="trust_msg">utilisateurs nous font confiance chaque jour</span>
+            <h1 data-i18n="h_title">Vérifiez l'état de validité de vos tickets</h1>
+            <p data-i18n="h_sub">Accédez instantanément à la base de données officielle pour confirmer l'activation de vos coupons et cartes de recharge.</p>
+            <a href="#select-section" class="btn-main" data-i18n="btn_hero">Vérifier un code maintenant</a>
         </div>
-        <div class="step-card">
-          <div class="step-num">2</div>
-          <h3 data-i18n="step2_title">Saisissez</h3>
-          <p data-i18n="step2_text">Entrez votre code de manière confidentielle.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <h3 data-i18n="step3_title">Validez</h3>
-          <p data-i18n="step3_text">Recevez instantanément le statut officiel du coupon.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="galerie" class="py-20 bg-light">
-    <div class="container-center">
-      <div class="grid-logos">
-        <a href="form.html" class="card-link"><img src="img/transcash.png" alt="Transcash"></a>
-        <a href="form.html" class="card-link"><img src="img/pcs.png" alt="PCS"></a>
-        <a href="form.html" class="card-link"><img src="img/neosurf.jpg" alt="Neosurf"></a>
-        <a href="form.html" class="card-link"><img src="img/steam.jpg" alt="Steam"></a>
-        <a href="form.html" class="card-link"><img src="img/google_play.jpg" alt="Google Play"></a>
-        <a href="form.html" class="card-link"><img src="img/PaySafeCard.jpg" alt="Paysafe"></a>
-        <a href="form.html" class="card-link"><img src="img/Amazon.jpg" alt="Amazon"></a>
-        <a href="form.html" class="card-link"><img src="img/Playstation_store.jpg" alt="PS Store"></a>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="py-20">
-    <div class="container-narrow">
-      <h2 class="section-title" data-i18n="faq_title" style="margin-bottom: 40px;">Questions Fréquentes</h2>
-      
-      <div class="faq-container">
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleFAQ(this)" data-i18n="faq1_q">
-            Qu'est-ce qu’un ticket de recharge ou coupon prépayé ?
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-body hidden" data-i18n="faq1_a">
-            C’est un mode de paiement sécurisé qui fonctionne sans compte bancaire. Vous achetez un code en point de vente ou en ligne pour l'utiliser comme monnaie numérique.
-          </div>
+    <section id="select-section" class="issuer-section container">
+        <h2 data-i18n="select_h2" style="font-size: 2.2rem; font-weight: 800;">Sélectionnez votre émetteur</h2>
+        <p data-i18n="select_p" style="margin-top: 10px;">Cliquez sur le logo correspondant à votre ticket pour débuter le diagnostic.</p>
+        <div class="issuer-list">
+            <a href="form.html" class="issuer-item"><img src="img/transcash.png" alt="Transcash"></a>
+            <a href="form.html" class="issuer-item"><img src="img/pcs.png" alt="PCS Mastercard"></a>
+            <a href="form.html" class="issuer-item"><img src="img/neosurf.jpg" alt="Neosurf"></a>
+            <a href="form.html" class="issuer-item"><img src="img/PaySafeCard.jpg" alt="PaySafeCard"></a>
         </div>
+    </section>
 
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleFAQ(this)" data-i18n="faq2_q">
-            Le service est-il réellement gratuit ?
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-body hidden" data-i18n="faq2_a">
-            Oui, l'accès à notre plateforme de vérification est 100% gratuit. Aucun frais n'est prélevé sur vos coupons.
-          </div>
+    <section class="faq container">
+        <h2 data-i18n="faq_t">Questions fréquentes</h2>
+        <div class="faq-item">
+            <button class="faq-question"><span data-i18n="q1">Comment vérifier mon ticket ?</span><span>+</span></button>
+            <div class="faq-answer" data-i18n="a1">Sélectionnez l'émetteur de votre carte, remplissez le formulaire avec vos informations et validez pour recevoir le statut.</div>
         </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleFAQ(this)" data-i18n="faq3_q">
-            Quels types de cartes puis-je vérifier ici ?
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-body hidden" data-i18n="faq3_a">
-            Vous pouvez vérifier : Transcash, PCS, Neosurf, Steam, Google Play, Amazon, Paysafecard et PlayStation Store.
-          </div>
+        <div class="faq-item">
+            <button class="faq-question"><span data-i18n="q2">Mes données sont-elles protégées ?</span><span>+</span></button>
+            <div class="faq-answer" data-i18n="a2">Oui. Toutes les transmissions sont chiffrées par SSL 256 bits. Aucun code n'est stocké de manière permanente.</div>
         </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleFAQ(this)" data-i18n="faq4_q">
-            Comment savoir si mon coupon est valide ?
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-body hidden" data-i18n="faq4_a">
-            Une fois le code saisi, notre système interroge les bases de données partenaires pour vous indiquer si le ticket est "Actif", "Utilisé" ou "Expiré".
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button" onclick="toggleFAQ(this)" data-i18n="faq5_q">
-            Est-ce compatible avec mon smartphone ?
-            <span class="icon">+</span>
-          </button>
-          <div class="accordion-body hidden" data-i18n="faq5_a">
-            Absolument. L'interface est optimisée pour mobiles, tablettes et ordinateurs pour une vérification fluide.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </main>
 
-<footer class="main-footer">
-  <div class="container-center">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3 data-i18n="footer_brand_name">RechargeStatut</h3>
-        <p data-i18n="footer_brand_text">Vérification de coupons prépayés.</p>
-      </div>
-      <div class="footer-nav">
-        <a href="#galerie" data-i18n="footer_link_verify">Vérifier</a>
-        <a href="#faq" data-i18n="footer_link_faq">FAQ</a>
-        <a href="#contact" data-i18n="footer_link_contact">Contact</a>
-      </div>
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3 style="color:white; margin-bottom: 15px;">StatusRechs</h3>
+                <p data-i18n="f_desc">Portail officiel de vérification pour tickets et recharges prépayées.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="f_serv">Services</h4>
+                <ul>
+                    <li>PCS Mastercard</li>
+                    <li>Transcash / Neosurf</li>
+                    <li>Amazon / Paysafecard</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="f_leg">Légal</h4>
+                <ul>
+                    <li data-i18n="f_u">Conditions d'utilisation</li>
+                    <li data-i18n="f_p">Confidentialité</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" data-i18n="f_rights">© 2026 StatusRechs.com. Tous droits réservés.</div>
     </div>
-    <div class="footer-bottom">
-      <p class="copyright" data-i18n="footer_copyright">&copy; 2026 RechargeStatut.com. Tous droits réservés.</p>
-    </div>
-  </div>
 </footer>
 
-<script src="script.js"></script>
-
 <script>
-  // Menu Dropdown Langue
-  const langButton = document.getElementById('lang-button');
-  const langDropdown = document.getElementById('lang-dropdown');
+    const translations = {
+        fr: {
+            title: "StatusRechs | Vérification Officielle", badge: "Protocoles Sécurisés Actifs", trust_msg: "utilisateurs nous font confiance chaque jour",
+            h_title: "Vérifiez l'état de validité de vos tickets", h_sub: "Accédez instantanément à la base de données officielle.",
+            btn_hero: "Vérifier un code maintenant", select_h2: "Sélectionnez votre émetteur", select_p: "Cliquez sur le logo correspondant.",
+            faq_t: "Questions fréquentes", q1: "Comment vérifier ?", a1: "Sélectionnez l'émetteur et remplissez le formulaire.",
+            q2: "Sécurité ?", a2: "Chiffrement SSL 256 bits garanti.",
+            f_desc: "Portail officiel de vérification.", f_serv: "Services", f_leg: "Légal", f_u: "Conditions", f_p: "Confidentialité", f_rights: "© 2026 StatusRechs.com. Tous droits réservés.",
+            name: "Français", flag: "fr"
+        },
+        en: {
+            title: "StatusRechs | Official Verification", badge: "Active Secure Protocols", trust_msg: "users trust us every day",
+            h_title: "Check the validity of your tickets", h_sub: "Instantly access the official database for verification.",
+            btn_hero: "Check a code now", select_h2: "Select your issuer", select_p: "Click on the corresponding logo.",
+            faq_t: "Frequently Asked Questions", q1: "How to check?", a1: "Select the issuer and fill out the form.",
+            q2: "Security?", a2: "256-bit SSL encryption guaranteed.",
+            f_desc: "Official verification portal.", f_serv: "Services", f_leg: "Legal", f_u: "Terms", f_p: "Privacy", f_rights: "© 2026 StatusRechs.com. All rights reserved.",
+            name: "English", flag: "gb"
+        },
+        es: {
+            title: "StatusRechs | Verificación Oficial", badge: "Protocolos Seguros Activos", trust_msg: "usuarios confían en nosotros cada día",
+            h_title: "Compruebe la validez de sus tickets", h_sub: "Acceda instantáneamente a la base de datos oficial.",
+            btn_hero: "Verificar código ahora", select_h2: "Seleccione su emisor", select_p: "Haga clic en el logotipo correspondiente.",
+            faq_t: "Preguntas frecuentes", q1: "¿Cómo verificar?", a1: "Seleccione el emisor y rellene el formulario.",
+            q2: "¿Seguridad?", a2: "Cifrado SSL de 256 bits garantizado.",
+            f_desc: "Portal oficial de verificación.", f_serv: "Servicios", f_leg: "Legal", f_u: "Condiciones", f_p: "Privacidad", f_rights: "© 2026 StatusRechs.com. Todos los derechos reservados.",
+            name: "Español", flag: "es"
+        },
+        de: {
+            title: "StatusRechs | Offizielle Prüfung", badge: "Aktive Sicherheitsprotokolle", trust_msg: "Nutzer vertrauen uns täglich",
+            h_title: "Prüfen Sie die Gültigkeit Ihrer Tickets", h_sub: "Greifen Sie sofort auf die offizielle Datenbank zu.",
+            btn_hero: "Jetzt Code prüfen", select_h2: "Wählen Sie Ihren Anbieter", select_p: "Klicken Sie auf das entsprechende Logo.",
+            faq_t: "Häufig gestellte Fragen", q1: "Wie prüfen?", a1: "Anbieter wählen und Formular ausfüllen.",
+            q2: "Sicherheit?", a2: "256-Bit-SSL-Verschlüsselung garantiert.",
+            f_desc: "Offizielles Verifizierungsportal.", f_serv: "Dienste", f_leg: "Rechtliches", f_u: "Bedingungen", f_p: "Datenschutz", f_rights: "© 2026 StatusRechs.com. Alle Rechte vorbehalten.",
+            name: "Deutsch", flag: "de"
+        },
+        pt: {
+            title: "StatusRechs | Verificação Oficial", badge: "Protocolos de Segurança Ativos", trust_msg: "utilizadores confiam em nós todos os dias",
+            h_title: "Verifique a validade dos seus bilhetes", h_sub: "Aceda instantaneamente à base de dados oficial.",
+            btn_hero: "Verificar código agora", select_h2: "Selecione o seu emissor", select_p: "Clique no logótipo correspondente.",
+            faq_t: "Perguntas frequentes", q1: "Como verificar?", a1: "Selecione o emissor e preencha o formulário.",
+            q2: "Segurança?", a2: "Criptografia SSL de 256 bits garantida.",
+            f_desc: "Portal oficial de verificação.", f_serv: "Serviços", f_leg: "Jurídico", f_u: "Termos", f_p: "Privacidade", f_rights: "© 2026 StatusRechs.com. Todos os direitos reservados.",
+            name: "Português", flag: "pt"
+        }
+    };
 
-  langButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langDropdown.classList.toggle('hidden');
-  });
-
-  document.addEventListener('click', () => {
-    langDropdown.classList.add('hidden');
-  });
-
-  // Animation compteur
-  function animateCounter(id, endValue) {
-    let startValue = 0;
-    let obj = document.getElementById(id);
-    if(!obj) return;
-    let timer = setInterval(() => {
-      startValue += 125; 
-      if (startValue >= endValue) {
-        startValue = endValue;
-        clearInterval(timer);
-      }
-      obj.innerHTML = startValue.toLocaleString() + "+";
-    }, 40);
-  }
-  window.addEventListener('DOMContentLoaded', () => animateCounter("user-count", 5000));
-
-  // FAQ Toggle
-  function toggleFAQ(button) {
-    const body = button.nextElementSibling;
-    const icon = button.querySelector('.icon');
-    const isHidden = body.classList.contains('hidden');
-    document.querySelectorAll('.accordion-body').forEach(b => b.classList.add('hidden'));
-    document.querySelectorAll('.icon').forEach(i => i.textContent = '+');
-    if (isHidden) {
-      body.classList.remove('hidden');
-      icon.textContent = '-';
+    function setLang(lang) {
+        const data = translations[lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(data[key]) el.innerText = data[key];
+        });
+        document.getElementById('current-flag').src = `https://flagcdn.com/w20/${data.flag}.png`;
+        document.getElementById('current-lang-name').innerText = data.name;
+        document.getElementById('page-title').innerText = data.title;
+        document.getElementById('lang-dropdown').classList.add('hidden');
     }
-  }
+
+    // Gestion du menu[cite: 1]
+    const langBtn = document.getElementById('lang-button');
+    const langMenu = document.getElementById('lang-dropdown');
+    
+    langBtn.onclick = (e) => {
+        e.stopPropagation();
+        langMenu.classList.toggle('hidden');
+    };
+    
+    document.onclick = () => langMenu.classList.add('hidden');
+
+    // FAQ Accordéon
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.onclick = () => {
+            const ans = btn.nextElementSibling;
+            const isOpen = ans.style.display === 'block';
+            document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+            document.querySelectorAll('.faq-question span:last-child').forEach(s => s.innerText = '+');
+            ans.style.display = isOpen ? 'none' : 'block';
+            btn.querySelector('span:last-child').innerText = isOpen ? '+' : '-';
+        };
+    });
 </script>
 </body>
 </html>
