@@ -3,7 +3,7 @@ const translations = {
   fr: {
     title: "RechargeStatut.com | Vérification Officielle",
     nav_home: "Accueil",
-    form_title: "Vérification de ",
+    form_title: "Vérification",
     form_nom: "Nom :",
     form_prenom: "Prénom :",
     form_montant: "Montant (€) :",
