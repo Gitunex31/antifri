@@ -1,122 +1,181 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Merci - Authentification Recharges</title>
-  <link rel="stylesheet" href="bootstrap.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Status Rechs - Confirmation</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #28a745; /* Vert pour le succès */
+            --bg-color: #f4f7f9;
+        }
 
-    .thank-you-box {
-      background-color: white;
-      border-radius: 12px;
-      padding: 40px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      max-width: 600px;
-      width: 90%;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    .thank-you-box h1 {
-      font-size: 2.5rem;
-      color: #0d6efd;
-    }
+        .thank-you-box {
+            background-color: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            max-width: 550px;
+            width: 90%;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-    .thank-you-box p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .btn-back {
-      margin-top: 2rem;
-    }
+        /* L'icône animée */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: #d4edda;
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-    @media (max-width: 576px) {
-      .thank-you-box h1 {
-        font-size: 1.8rem;
-      }
-      .thank-you-box p {
-        font-size: 1rem;
-      }
-    }
-  </style>
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .thank-you-box h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #e3f2fd;
+            color: #0d6efd;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .thank-you-box p {
+            font-size: 1.1rem;
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        .btn-back {
+            margin-top: 30px;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+            color: white;
+        }
+
+        @media (max-width: 576px) {
+            .thank-you-box { padding: 30px 20px; }
+            .thank-you-box h1 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
 <body>
-  <div class="thank-you-box">
-    <h1 id="thankTitle">Merci !</h1>
-    <p id="thankMessage">Votre message a bien été envoyé. Nous vous contacterons dans les plus brefs délais.</p>
-    <a href="index.html" class="btn btn-primary btn-back" id="backHome">Retour à l'accueil</a>
-  </div>
 
-  <script>
-    const translations = {
-      fr: {
-        title: "Merci !",
-        message: "Votre message a bien été envoyé. Nous vous contacterons dans les plus brefs délais.",
-        back: "Retour à l'accueil"
-      },
-      en: {
-        title: "Thank you!",
-        message: "Your message has been successfully sent. We will contact you as soon as possible.",
-        back: "Back to homepage"
-      },
-      es: {
-        title: "¡Gracias!",
-        message: "Su mensaje ha sido enviado correctamente. Nos pondremos en contacto con usted lo antes posible.",
-        back: "Volver al inicio"
-      },
-      de: {
-        title: "Danke!",
-        message: "Ihre Nachricht wurde erfolgreich gesendet. Wir werden Sie so bald wie möglich kontaktieren.",
-        back: "Zur Startseite"
-      },
-      it: {
-        title: "Grazie!",
-        message: "Il tuo messaggio è stato inviato correttamente. Ti contatteremo il prima possibile.",
-        back: "Torna alla homepage"
-      },
-      pt: {
-        title: "Obrigado!",
-        message: "Sua mensagem foi enviada com sucesso. Entraremos em contato o mais breve possível.",
-        back: "Voltar à página inicial"
-      }
-    };
+    <div class="thank-you-box">
+        <div class="success-checkmark">✓</div>
+        <div class="status-badge" id="statusLabel">Status Rechs : OK</div>
+        <h1 id="thankTitle">Merci !</h1>
+        <p id="thankMessage">Votre demande a été traitée. Notre équipe examine les informations de recharge.</p>
+        <a href="index.html" class="btn-back" id="backHome">Retour à l'accueil</a>
+    </div>
 
-    // Détecter la langue du navigateur
-    const browserLang = (navigator.language || navigator.userLanguage || 'fr').substring(0, 2);
+    <script>
+        const translations = {
+            fr: {
+                status: "Status Rechs : Traitement",
+                title: "Merci de votre confiance",
+                message: "Votre demande de recharge a été soumise avec succès. Vous recevrez une notification dès que le statut sera mis à jour.",
+                back: "Retour au tableau de bord"
+            },
+            en: {
+                status: "Status Rechs: Processing",
+                title: "Thank you!",
+                message: "Your recharge request has been successfully submitted. You will receive a notification as soon as the status is updated.",
+                back: "Back to Dashboard"
+            },
+            es: {
+                status: "Status Rechs: Procesando",
+                title: "¡Gracias!",
+                message: "Su solicitud de recarga ha sido enviada con éxito. Recibirá una notificación en cuanto se actualice el estado.",
+                back: "Volver al inicio"
+            },
+            de: {
+                status: "Status Rechs: In Bearbeitung",
+                title: "Vielen Dank!",
+                message: "Ihre Aufladeanfrage wurde erfolgreich übermittelt. Sie erhalten eine Benachrichtigung, sobald der Status aktualisiert wurde.",
+                back: "Zurück zur Startseite"
+            },
+            it: {
+                status: "Status Rechs: In corso",
+                title: "Grazie!",
+                message: "La tua richiesta di ricarica è stata inviata con successo. Riceverai una notifica non appena lo stato verrà aggiornato.",
+                back: "Torna alla home"
+            },
+            pt: {
+                status: "Status Rechs: Processando",
+                title: "Obrigado!",
+                message: "Seu pedido de recarga foi enviado com sucesso. Você receberá uma notificação assim que o status for atualizado.",
+                back: "Voltar ao início"
+            }
+        };
 
-    // Vérifier s'il y a une langue enregistrée localement, sinon utiliser celle du navigateur
-    const lang = localStorage.getItem('lang') || browserLang;
+        // Logique de langue
+        const browserLang = (navigator.language || navigator.userLanguage || 'fr').substring(0, 2);
+        const lang = localStorage.getItem('lang') || browserLang;
+        const chosenLang = translations[lang] ? lang : 'fr';
 
-    // Si la langue détectée n’existe pas, fallback en français
-    const chosenLang = translations[lang] ? lang : 'fr';
+        // Application des textes
+        document.getElementById('statusLabel').textContent = translations[chosenLang].status;
+        document.getElementById('thankTitle').textContent = translations[chosenLang].title;
+        document.getElementById('thankMessage').textContent = translations[chosenLang].message;
+        document.getElementById('backHome').textContent = translations[chosenLang].back;
+        document.documentElement.lang = chosenLang;
 
-    // Appliquer la traduction
-    document.getElementById('thankTitle').textContent = translations[chosenLang].title;
-    document.getElementById('thankMessage').textContent = translations[chosenLang].message;
-    document.getElementById('backHome').textContent = translations[chosenLang].back;
-
-    // Mettre à jour l'attribut lang du HTML
-    document.documentElement.lang = chosenLang;
-
-    // Blocage du clic droit et raccourcis (Déjà présent dans votre code)
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = function (e) {
-      if (e.keyCode == 123 ||
-        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) ||
-        (e.ctrlKey && e.keyCode == 85)) return false;
-    };
-  </script>
+        // Protection basique
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function (e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) 
+                return false;
+        };
+    </script>
 </body>
 </html>
