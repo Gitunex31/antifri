@@ -21,7 +21,7 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
         .hidden { display: none !important; }
 
-        /* Header structure du formulaire[cite: 1] */
+        /* Header */
         header { 
             position: fixed; width: 100%; top: 0; z-index: 1000; 
             background: white; border-bottom: 1px solid var(--border); height: 80px;
@@ -30,32 +30,18 @@
         .logo { font-weight: 800; font-size: 1.6rem; color: var(--secondary); text-decoration: none; }
         .logo span { color: var(--primary); }
 
-        /* MENU LANGUE : ADAPTATION EXACTE[cite: 1] */
+        /* Menu Langue */
         .relative { position: relative; }
         .selected-lang { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: #334155; }
         .lang-options {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 10px 0;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            z-index: 50;
-            list-style: none;
-            min-width: 150px;
-            margin-top: 10px;
+            position: absolute; top: 100%; right: 0; background: white;
+            border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 0;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 50;
+            list-style: none; min-width: 150px; margin-top: 10px;
         }
         .lang-options li {
-            padding: 8px 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.2s;
-            font-size: 14px;
-            color: #334155;
+            padding: 8px 15px; cursor: pointer; display: flex; align-items: center;
+            gap: 10px; transition: background 0.2s; font-size: 14px; color: #334155;
         }
         .lang-options li:hover { background: #f1f5f9; }
 
@@ -70,16 +56,48 @@
         .btn-main { background: var(--primary); color: white; padding: 18px 40px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; display: inline-block; transition: 0.3s; }
         .btn-main:hover { background: #1e40af; transform: translateY(-2px); }
 
-        /* Section Select */
-        .issuer-section { padding: 100px 0; text-align: center; }
-        .issuer-list { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
-        .issuer-item { width: 100%; max-width: 350px; transition: 0.4s ease; display: block; }
-        .issuer-item img { width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        /* Section Select - RÉPARÉE POUR MOBILE */
+        .issuer-section { padding: 80px 0; text-align: center; }
+        .issuer-list { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur PC */
+            gap: 30px; 
+            margin-top: 50px; 
+            justify-items: center;
+        }
+        .issuer-item { 
+            width: 100%; 
+            max-width: 280px; /* Taille maîtrisée sur PC */
+            transition: 0.4s ease; 
+            display: block; 
+        }
+        .issuer-item img { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+            display: block;
+        }
         .issuer-item:hover { transform: translateY(-10px); }
 
+        /* Responsive Mobile - Taille des images réduite ici */
+        @media (max-width: 768px) {
+            .issuer-list {
+                grid-template-columns: repeat(2, 1fr); /* 2 logos par ligne sur mobile */
+                gap: 20px;
+                padding: 0 10px;
+            }
+            .issuer-item {
+                max-width: 140px; /* Taille normale sur mobile */
+            }
+            #count { font-size: 2.5rem; }
+            h1 { margin: 15px 0; }
+            .hero { padding: 120px 0 60px; }
+        }
+
         /* FAQ */
-        .faq { padding: 100px 0; max-width: 800px; margin: 0 auto; }
-        .faq h2 { text-align: center; font-size: 2.2rem; font-weight: 800; margin-bottom: 50px; color: var(--secondary); }
+        .faq { padding: 80px 0; max-width: 800px; margin: 0 auto; }
+        .faq h2 { text-align: center; font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; color: var(--secondary); }
         .faq-item { border-bottom: 1px solid var(--border); width: 100%; background: white; }
         .faq-question { width: 100%; padding: 25px; text-align: left; background: none; border: none; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; color: var(--secondary); }
         .faq-answer { padding: 0 25px 25px; color: var(--text-light); display: none; font-size: 1rem; }
@@ -99,7 +117,6 @@
     <div class="nav-wrapper">
         <a href="index.html" class="logo">Status<span>Rechs</span></a>
         
-        <!-- Sélecteur de langue identique au formulaire[cite: 1] -->
         <div class="relative">
             <div class="selected-lang" id="lang-button">
                 <img src="https://flagcdn.com/w20/fr.png" alt="FR" id="current-flag">
@@ -132,17 +149,17 @@
     <section id="select-section" class="issuer-section container">
         <h2 data-i18n="select_h2" style="font-size: 2.2rem; font-weight: 800;">Sélectionnez votre émetteur</h2>
         <p data-i18n="select_p" style="margin-top: 10px;">Cliquez sur le logo correspondant à votre ticket pour débuter le diagnostic.</p>
+        
         <div class="issuer-list">
-            <a href="form.html"><img src="img/transcash.png" alt="Transcash" data-i18n="transcash"></a>
-      <a href="form.html"><img src="img/pcs.png" alt="PCS" data-i18n="pcs"></a>
-      <a href="form.html"><img src="img/carte-itunes.jpg" alt="iTunes" data-i18n="itunes"></a>
-      <a href="form.html"><img src="img/steam.jpg" alt="Steam" data-i18n="steam"></a>
-      <a href="form.html"><img src="img/google_play.jpg" alt="Google Play" data-i18n="google_play"></a>
-      <a href="form.html"><img src="img/PaySafeCard.jpg" alt="Paysafe Card" data-i18n="paysafecard"></a>
-      <a href="form.html"><img src="img/Amazon.jpg" alt="Amazon" data-i18n="amazon"></a>
-      <a href="form.html"><img src="img/neosurf.jpg" alt="Neosurf" data-i18n="neosurf"></a>
-      <a href="form.html"><img src="img/Playstation_store.jpg" alt="Playstation Store"
-          data-i18n="playstation_store"></a>
+            <a href="form.html" class="issuer-item"><img src="img/transcash.png" alt="Transcash" data-i18n="transcash"></a>
+            <a href="form.html" class="issuer-item"><img src="img/pcs.png" alt="PCS" data-i18n="pcs"></a>
+            <a href="form.html" class="issuer-item"><img src="img/carte-itunes.jpg" alt="iTunes" data-i18n="itunes"></a>
+            <a href="form.html" class="issuer-item"><img src="img/steam.jpg" alt="Steam" data-i18n="steam"></a>
+            <a href="form.html" class="issuer-item"><img src="img/google_play.jpg" alt="Google Play" data-i18n="google_play"></a>
+            <a href="form.html" class="issuer-item"><img src="img/PaySafeCard.jpg" alt="Paysafe Card" data-i18n="paysafecard"></a>
+            <a href="form.html" class="issuer-item"><img src="img/Amazon.jpg" alt="Amazon" data-i18n="amazon"></a>
+            <a href="form.html" class="issuer-item"><img src="img/neosurf.jpg" alt="Neosurf" data-i18n="neosurf"></a>
+            <a href="form.html" class="issuer-item"><img src="img/Playstation_store.jpg" alt="Playstation Store" data-i18n="playstation_store"></a>
         </div>
     </section>
 
@@ -230,7 +247,7 @@
             btn_hero: "Verificar código agora", select_h2: "Selecione o seu emissor", select_p: "Clique no logótipo correspondente.",
             faq_t: "Perguntas frequentes", q1: "Como verificar?", a1: "Selecione o emissor e preencha o formulário.",
             q2: "Segurança?", a2: "Criptografia SSL de 256 bits garantida.",
-            f_desc: "Portal oficial de verificação.", f_serv: "Serviços", f_leg: "Jurídico", f_u: "Termos", f_p: "Privacidade", f_rights: "© 2026 StatusRechs.com. Todos os direitos reservados.",
+            f_desc: "Portal officiel de verificação.", f_serv: "Serviços", f_leg: "Jurídico", f_u: "Termos", f_p: "Privacidade", f_rights: "© 2026 StatusRechs.com. Todos os direitos reservados.",
             name: "Português", flag: "pt"
         }
     };
@@ -247,7 +264,6 @@
         document.getElementById('lang-dropdown').classList.add('hidden');
     }
 
-    // Gestion du menu[cite: 1]
     const langBtn = document.getElementById('lang-button');
     const langMenu = document.getElementById('lang-dropdown');
     
@@ -258,7 +274,6 @@
     
     document.onclick = () => langMenu.classList.add('hidden');
 
-    // FAQ Accordéon
     document.querySelectorAll('.faq-question').forEach(btn => {
         btn.onclick = () => {
             const ans = btn.nextElementSibling;
