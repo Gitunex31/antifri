@@ -7,6 +7,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Force le calcul correct des tailles pour éviter les décalages au clic */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Stabilise l'input au focus */
+.form-group input:focus {
+  outline: none;
+  border-color: #2563eb;
+  /* Utilise inset si tu sens que l'ombre pousse les bords, 
+     ou assure-toi que l'ombre n'est pas trop large */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  /* Empêche tout changement de taille de police ou de gras au focus */
+  font-weight: 400; 
+}
     /* Styles spécifiques au formulaire */
     .form-container {
       padding: 80px 20px;
