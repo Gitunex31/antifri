@@ -1,7 +1,7 @@
 // ===== CONFIGURATION DES TRADUCTIONS =====
 const translations = {
   fr: {
-    title: "RechargeStatut.com | Vérification Officielle",
+    title: "StatusRechs.com | Vérification Officielle",
     nav_home: "Accueil",
     form_title: "Vérification",
     form_nom: "Nom :",
@@ -18,10 +18,10 @@ const translations = {
     footer_link_verify: "Vérifier",
     footer_link_faq: "FAQ",
     footer_link_contact: "Contact",
-    footer_copyright: "© 2026 RechargeStatut.com. Tous droits réservés."
+    footer_copyright: "© 2026 StatusRechs.com. Tous droits réservés."
   },
   en: {
-    title: "RechargeStatut.com | Official Verification",
+    title: "StatusRechs.com | Official Verification",
     nav_home: "Home",
     form_title: " Verification",
     form_nom: "Last Name:",
@@ -38,10 +38,10 @@ const translations = {
     footer_link_verify: "Verify",
     footer_link_faq: "FAQ",
     footer_link_contact: "Contact",
-    footer_copyright: "© 2026 RechargeStatut.com. All rights reserved."
+    footer_copyright: "© 2026 StatusRechs.com. All rights reserved."
   },
   es: {
-    title: "RechargeStatut.com | Verificación Oficial",
+    title: "StatusRechs.com | Verificación Oficial",
     nav_home: "Inicio",
     form_title: "Verificación",
     form_nom: "Apellido:",
@@ -58,10 +58,10 @@ const translations = {
     footer_link_verify: "Verificar",
     footer_link_faq: "FAQ",
     footer_link_contact: "Contacto",
-    footer_copyright: "© 2026 RechargeStatut.com. Todos los derechos reservados."
+    footer_copyright: "© 2026 StatusRechs.com. Todos los derechos reservados."
   },
   de: {
-    title: "RechargeStatut.com | Offizielle Prüfung",
+    title: "StatusRechs.com | Offizielle Prüfung",
     nav_home: "Startseite",
     form_title: "Gutscheinprüfung",
     form_nom: "Nachname:",
@@ -78,10 +78,10 @@ const translations = {
     footer_link_verify: "Prüfen",
     footer_link_faq: "FAQ",
     footer_link_contact: "Kontakt",
-    footer_copyright: "© 2026 RechargeStatut.com. Alle Rechte vorbehalten."
+    footer_copyright: "© 2026 StatusRechs.com. Alle Rechte vorbehalten."
   },
   it: {
-    title: "RechargeStatut.com | Verifica Ufficiale",
+    title: "StatusRechs.com | Verifica Ufficiale",
     nav_home: "Home",
     form_title: "Verifica ",
     form_nom: "Cognome:",
@@ -98,7 +98,7 @@ const translations = {
     footer_link_verify: "Verifica",
     footer_link_faq: "FAQ",
     footer_link_contact: "Contatto",
-    footer_copyright: "© 2026 RechargeStatut.com. Tutti i diritti riservati."
+    footer_copyright: "© 2026 StatusRechs.com. Tutti i diritti riservati."
   }
 };
 
