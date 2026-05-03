@@ -80,15 +80,15 @@
         }
         .issuer-item:hover { transform: translateY(-10px); }
 
-        /* Responsive Mobile - Taille des images réduite ici */
+        /* Responsive Mobile - Modifié pour afficher une seule image par ligne */
         @media (max-width: 768px) {
             .issuer-list {
-                grid-template-columns: repeat(2, 1fr); /* 2 logos par ligne sur mobile */
+                grid-template-columns: 1fr; /* 1 image par ligne sur mobile */
                 gap: 20px;
                 padding: 0 10px;
             }
             .issuer-item {
-                max-width: 140px; /* Taille normale sur mobile */
+                max-width: 280px; /* Taille adaptée pour un affichage vertical clair */
             }
             #count { font-size: 2.5rem; }
             h1 { margin: 15px 0; }
@@ -225,7 +225,7 @@
         },
         es: {
             title: "StatusRechs | Verificación Oficial", badge: "Protocolos Seguros Activos", trust_msg: "usuarios confían en nosotros cada día",
-            h_title: "Compruebe la validez de sus tickets", h_sub: "Acceda instantáneamente a la base de datos oficial.",
+            h_title: "Compruebe la validez de sus tickets", h_sub: "Acceda instantáneamente a la base de données oficial.",
             btn_hero: "Verificar código ahora", select_h2: "Seleccione su emisor", select_p: "Haga clic en el logotipo correspondiente.",
             faq_t: "Preguntas frecuentes", q1: "¿Cómo verificar?", a1: "Seleccione el emisor y rellene el formulario.",
             q2: "¿Seguridad?", a2: "Cifrado SSL de 256 bits garantizado.",
@@ -245,7 +245,7 @@
             title: "StatusRechs | Verificação Oficial", badge: "Protocolos de Segurança Ativos", trust_msg: "utilizadores confiam em nós todos os dias",
             h_title: "Verifique a validade dos seus bilhetes", h_sub: "Aceda instantaneamente à base de dados oficial.",
             btn_hero: "Verificar código agora", select_h2: "Selecione o seu emissor", select_p: "Clique no logótipo correspondente.",
-            faq_t: "Perguntas frequentes", q1: "Como verificar?", a1: "Selecione o emissor e preencha o formulário.",
+            faq_t: "Perguntas fréquentes", q1: "Como verificar?", a1: "Selecione o emissor e preencha o formulário.",
             q2: "Segurança?", a2: "Criptografia SSL de 256 bits garantida.",
             f_desc: "Portal officiel de verificação.", f_serv: "Serviços", f_leg: "Jurídico", f_u: "Termos", f_p: "Privacidade", f_rights: "© 2026 StatusRechs.com. Todos os direitos reservados.",
             name: "Português", flag: "pt"
