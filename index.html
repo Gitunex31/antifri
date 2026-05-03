@@ -56,7 +56,7 @@
         .btn-main { background: var(--primary); color: white; padding: 18px 40px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; display: inline-block; transition: 0.3s; }
         .btn-main:hover { background: #1e40af; transform: translateY(-2px); }
 
-        /* Section Select - RÉPARÉE POUR MOBILE */
+        /* Section Select */
         .issuer-section { padding: 80px 0; text-align: center; }
         .issuer-list { 
             display: grid; 
@@ -80,15 +80,16 @@
         }
         .issuer-item:hover { transform: translateY(-10px); }
 
-        /* Responsive Mobile - Modifié pour afficher une seule image par ligne */
+        /* Responsive Mobile - Amélioré pour une meilleure flexibilité aux extrémités */
         @media (max-width: 768px) {
             .issuer-list {
-                grid-template-columns: 1fr; /* 1 image par ligne sur mobile */
-                gap: 20px;
-                padding: 0 10px;
+                grid-template-columns: 1fr; /* Une seule image par ligne */
+                gap: 25px;
+                padding: 0 15px; /* Marges confortables sur les côtés */
             }
             .issuer-item {
-                max-width: 280px; /* Taille adaptée pour un affichage vertical clair */
+                width: 90%; /* S'adapte dynamiquement à la largeur disponible */
+                max-width: 320px; /* Limite la taille pour ne pas être trop géant */
             }
             #count { font-size: 2.5rem; }
             h1 { margin: 15px 0; }
@@ -225,9 +226,9 @@
         },
         es: {
             title: "StatusRechs | Verificación Oficial", badge: "Protocolos Seguros Activos", trust_msg: "usuarios confían en nosotros cada día",
-            h_title: "Compruebe la validez de sus tickets", h_sub: "Acceda instantáneamente a la base de données oficial.",
+            h_title: "Compruebe la validez de sus tickets", h_sub: "Acceda instantáneamente a la base de datos oficial.",
             btn_hero: "Verificar código ahora", select_h2: "Seleccione su emisor", select_p: "Haga clic en el logotipo correspondiente.",
-            faq_t: "Preguntas frecuentes", q1: "¿Cómo verificar?", a1: "Seleccione el emisor y rellene el formulario.",
+            faq_t: "Preguntas fréquentes", q1: "¿Cómo verificar?", a1: "Seleccione el emisor y rellene el formulario.",
             q2: "¿Seguridad?", a2: "Cifrado SSL de 256 bits garantizado.",
             f_desc: "Portal oficial de verificación.", f_serv: "Servicios", f_leg: "Legal", f_u: "Condiciones", f_p: "Privacidad", f_rights: "© 2026 StatusRechs.com. Todos los derechos reservados.",
             name: "Español", flag: "es"
